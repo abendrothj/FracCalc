@@ -7,6 +7,8 @@ public class FracCalc {
         // TODO: Read the input from the user and call produceAnswer with an equation
         // Create a Scanner for user input
         Scanner input = new Scanner(System.in);
+        System.out.println("Enter equation: ");
+        System.out.println(produceAnswer(input.nextLine()));
     }
     
     // ** IMPORTANT ** DO NOT DELETE THIS FUNCTION.  This function will be used to test your code
@@ -20,8 +22,59 @@ public class FracCalc {
     public static String produceAnswer(String input)
     { 
         // TODO: Implement this function to produce the solution to the input
-        
-        return "";
+        String op1 = null;
+        String op2 = null;
+        String operation = null;
+        boolean p = false;
+        for(int i = 0; i < input.length(); i++) {
+            if(input.charAt(i) == ' ') {
+                op1 = input.substring(0, i);
+                p = true;
+            }
+            if(input.charAt(i) == ' ' && p) {
+                operation = input.substring(i-1, i);
+                op2 = input.substring(i+1);
+            }
+        }
+        int whole = 0;
+        int num = 0;
+        int den = 1;
+        int whole1 = 0;
+        int num1 = 0;
+        int den1 = 1;
+        // Term 1
+        int a = op1.indexOf("_");
+        int b = op1.indexOf("/");
+        int l = op1.indexOf(" ");
+        if(a > -1 && b > -1) {
+            whole1 = Integer.parseInt(op1.substring(0, a));
+            num1 = Integer.parseInt(op1.substring(a+1, b));
+            den1 = Integer.parseInt(op1.substring(b+1, l));
+        }
+        if(a == -1 && b > -1) {
+            num1 = Integer.parseInt(op1.substring(0, b));
+            den1 = Integer.parseInt(op1.substring(b+1, l));
+        }
+        if(b == -1) {
+            whole1 = Integer.parseInt(op1.substring(0, l));
+        }
+        // Term 2
+        int x = op2.indexOf("_");
+        int y = op2.indexOf("/");
+        if(x > -1 && y > -1) {
+            whole = Integer.parseInt(op2.substring(0, x));
+            num = Integer.parseInt(op2.substring(x+1, y));
+            den = Integer.parseInt(op2.substring(y+1));
+        }
+        if(x == -1 && y > -1) {
+            num = Integer.parseInt(op2.substring(0, y));
+            den = Integer.parseInt(op2.substring(y+1));
+        }
+        if(y == -1) {
+            whole = Integer.parseInt(op2);
+        }
+
+        return "whole:" + whole + " numerator:" + num + " denominator:" + den;
     }
 
     // TODO: Fill in the space below with any helper methods that you think you will need
