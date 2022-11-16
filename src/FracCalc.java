@@ -73,10 +73,53 @@ public class FracCalc {
         if(y == -1) {
             whole = Integer.parseInt(op2);
         }
+        int numer2 = toImproperNum(whole, num, den);
+        int numer1 = toImproperNum(whole1, num1, den1);
+        int numerator;
+        int denom;
 
-        return "whole:" + whole + " numerator:" + num + " denominator:" + den;
+        switch(operation) {
+            case "+":
+                numerator = (numer1 * den) + (numer2 * den1);
+                denom = den * den1;
+                break;
+            case "-":
+                numerator = (numer1 * den) - (numer2 * den1);
+                denom = den * den1;
+                break;
+            case "*":
+                numerator = (numer1 * numer2);
+                denom = den * den1;
+                break;
+            case "/":
+                numerator = (num1 * den);
+                denom = den1 * numer1;
+                break;
+            default:
+                return "Invalid!";
+        }
+        int w = 0;
+        boolean mix = false;
+        if(numerator >= denom) {
+            w = (int)(numerator / denom);
+            numerator = numerator % denom;
+            mix = true;
+        }
+        if(numerator == 0) {
+            return "0";
+        }
+        if(mix) {
+            return w+"_"+numerator+"/"+denom;
+        }
+        else {
+            return numerator+"/"+denom;
+        }
+
     }
 
     // TODO: Fill in the space below with any helper methods that you think you will need
+    public static int toImproperNum(int w, int n, int d) {
+        return ((w*d)+n);
+    }
     
 }
