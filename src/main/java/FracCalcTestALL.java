@@ -1,8 +1,8 @@
-import static org.junit.Assert.assertEquals;
-
 import fracCalc.FracCalcTestHelper;
 import org.junit.runner.RunWith;
 import org.junit.runners.Suite;
+
+import static org.junit.Assert.assertEquals;
 
 // To run all tests, just click somewhere inside this file, and click the Play button
 // The results will appear categorized by checkpoint.  Your code should pass
