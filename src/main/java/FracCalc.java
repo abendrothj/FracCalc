@@ -1,3 +1,4 @@
+import java.math.BigInteger;
 import java.util.*;
 public class FracCalc {
 
@@ -8,6 +9,7 @@ public class FracCalc {
         Scanner input = new Scanner(System.in);
         System.out.println("Enter equation: ");
         System.out.println(produceAnswer(input.nextLine()));
+        input.close();
     }
     
     // ** IMPORTANT ** DO NOT DELETE THIS FUNCTION.  This function will be used to test your code
@@ -92,7 +94,6 @@ public class FracCalc {
         
         int numerator;
         int denom = 1;
-      boolean neg = false;
 
         switch(operation) {
             case "+":
@@ -140,13 +141,13 @@ public class FracCalc {
             w = (int)(numerator / denom);
             numerator = numerator % denom;
             mix = true;
-        } boolean factor = false;
-      for(int j = 100000; !factor; j--) {
-        if(numerator % j == 0 && denom % j == 0) {
-          factor = true;
-          numerator /= j;
-          denom /= j; }
-    }
+        }
+      // Greatest common denominator finder
+      BigInteger n = BigInteger.valueOf(numerator);
+      BigInteger d = BigInteger.valueOf(denom);
+      BigInteger gcd = n.gcd(d);
+      numerator /= gcd.intValue();
+      denom /= gcd.intValue();
         if(mix && numerator != 0) {
             return w+"_"+Math.abs(numerator)+"/"+denom;
         } else if(mix && numerator == 0) {
@@ -167,4 +168,4 @@ public class FracCalc {
     public static int toImproperNum(int w, int n, int d) {
         return ((w*d)+n);
     }
-  }
+}
